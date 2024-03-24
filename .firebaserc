@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "rifa-brenda": {
+      "hosting": {
+        "rifa": [
+          "rifa-brenda"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "rifa-brenda"
+  }
+}

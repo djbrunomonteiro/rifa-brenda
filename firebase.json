@@ -1,0 +1,9 @@
+{
+  "hosting": [
+    {
+      "target": "rifa",
+      "source": ".",
+      "frameworksBackend": {}
+    }
+  ]
+}
