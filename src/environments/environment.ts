@@ -1,5 +1,5 @@
 export const environment = {
-
+    apiUrl: 'http://localhost:3000',
     firebaseConfig : {
         apiKey: "AIzaSyD9vftHNix5Ice0XNFKDgF2DTKk8t5NwkE",
         authDomain: "rifa-brenda.firebaseapp.com",

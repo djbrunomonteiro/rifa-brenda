@@ -1,0 +1,31 @@
+<p>numeros disponiveis</p>
+<p>numeros não disponiveis</p>
+<div [formGroup]="form">
+    <mat-button-toggle-group  formControlName="select" class="container-nums" name="numeros" aria-label="Ingredients" multiple>
+        @for (item of numeros$ | async; track $index) {
+            <mat-button-toggle class="num" [value]="item" [disabled]="item.comprador !== ''">
+                {{item.numero}}
+            </mat-button-toggle>
+    
+        }
+    </mat-button-toggle-group>
+
+</div>
+
+<div class="checkout">
+    <div class="container-checkout">
+        <div class="total">
+            <p class="m-0 p-0">SELECIONADOS: </p>
+            <p class="m-0 p-0">
+                @for (item of ctrlSelect; track $index) {
+                    <span>{{item}}, </span>
+                }
+
+            </p>
+        </div>
+        <button (click)="openCheckout()" [disabled]="!form.value.select" mat-raised-button color="primary">finalizar</button>
+
+    </div>
+
+   
+</div>

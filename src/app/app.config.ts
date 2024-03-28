@@ -6,7 +6,26 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { environment } from '../environments/environment';
+import { provideEnvironmentNgxMask } from 'ngx-mask';
+import { provideHttpClient } from '@angular/common/http';
+import { provideLottieOptions } from 'ngx-lottie';
+import player from 'lottie-web';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), importProvidersFrom(provideFirebaseApp(() => initializeApp({"projectId":"rifa-brenda","appId":"1:249198544691:web:280944029e34281d366046","storageBucket":"rifa-brenda.appspot.com","apiKey":"AIzaSyD9vftHNix5Ice0XNFKDgF2DTKk8t5NwkE","authDomain":"rifa-brenda.firebaseapp.com","messagingSenderId":"249198544691"}))), importProvidersFrom(provideAuth(() => getAuth())), importProvidersFrom(provideFirestore(() => getFirestore())), provideAnimationsAsync()]
+  providers: [
+    provideEnvironmentNgxMask(),
+    provideRouter(routes), 
+    provideHttpClient(),
+    importProvidersFrom([
+      provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+      provideAuth(() => getAuth()),
+      provideFirestore(() => getFirestore()),
+    ]),
+    provideAnimationsAsync(),
+    provideLottieOptions({
+      player: () => player,
+    }),
+    
+  ]
 };
