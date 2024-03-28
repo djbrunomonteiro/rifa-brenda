@@ -26,6 +26,6 @@ export const appConfig: ApplicationConfig = {
     provideLottieOptions({
       player: () => player,
     }),
-    
+
   ]
 };

@@ -1,42 +1,43 @@
 @if(loading){
-  <mat-dialog-content>
-    <div class="container-dialog">
-      <p class="text-center  m-0 p-0">Só um minutinho, estou salvando...</p>
-      <ng-lottie [options]="options" /> 
-      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-    </div>
- 
+<mat-dialog-content>
+  <div class="container-dialog">
+    <p class="text-center  m-0 p-0">{{textLoading}}</p>
+    <ng-lottie [options]="options" />
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+
 </mat-dialog-content>
 
 }@else {
-  <h2 mat-dialog-title>Obrigado por sua ajuda</h2>
-  <mat-dialog-content [formGroup]="form">
-      <div class="container-dialog">
-          <p>Por favor preencha os dados a seguir:</p>
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Seu nome</mat-label>
-            <input formControlName="comprador" matInput placeholder="ex: Maria">
-          </mat-form-field>
-  
-          <mat-form-field appearance="outline" class="w-100">
-              <mat-label>Whatsapp</mat-label>
-              <input formControlName="whatsapp" matInput placeholder="ex: (98)00000-0000" mask="(00) 0 0000-0000">
-          </mat-form-field>
-  
-          <h4>Total: {{total | currency: 'BRL'}}</h4>
-  
-          <p>Passos para confirmação:</p>
-          <p>Enviar o valor para a CHAVE PIX:</p>
-          <h3><b>(98) 970023197</b></h3>
-          <p class="p-0 m-0"><i>Brenda K M Tavares</i> </p>
-          <p class="p-0 m-0"><i>Banco Nubank</i> </p>
-  
-      </div>
-   
-  </mat-dialog-content>
-  <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>Cancelar</button>
-    <button (click)="save()" [disabled]="form.invalid" mat-raised-button color="primary" class="btn-salvar">SALVAR</button>
-  </mat-dialog-actions>
+<h2 mat-dialog-title>Obrigado por sua ajuda</h2>
+<mat-dialog-content [formGroup]="form">
+  <div class="container-dialog">
+    <p>Por favor preencha os dados a seguir:</p>
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Seu nome</mat-label>
+      <input formControlName="comprador" matInput placeholder="ex: Maria">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Whatsapp</mat-label>
+      <input formControlName="whatsapp" matInput placeholder="ex: (98)00000-0000" mask="(00) 0 0000-0000">
+    </mat-form-field>
+
+    <h4>Total: {{total | currency: 'BRL'}}</h4>
+
+    <p>Passos para confirmação:</p>
+    <p>Enviar o valor para a CHAVE PIX:</p>
+    <h3><b>(98) 970023197</b></h3>
+    <p class="p-0 m-0"><i>Brenda K M Tavares</i> </p>
+    <p class="p-0 m-0"><i>Banco Nubank</i> </p>
+
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button (click)="save()" [disabled]="form.invalid" mat-raised-button color="primary"
+    class="btn-salvar">SALVAR</button>
+</mat-dialog-actions>
 
 }

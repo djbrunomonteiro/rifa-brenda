@@ -1,6 +1,10 @@
 <mat-toolbar class="d-flex justify-content-between" color="primary">
-    <span class="text-uppercase">rifa da Brenda</span>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <span routerLink="/" class="text-uppercase">rifa da Brenda</span>
+    
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="example-icon" aria-label="Example icon-button with menu icon">
         <mat-icon>menu</mat-icon>
-      </button>
+    </button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item class="p-4" routerLink="/admin">ÁREA ADMIN</button>
+      </mat-menu>
   </mat-toolbar>

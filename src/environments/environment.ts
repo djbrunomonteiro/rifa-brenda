@@ -7,5 +7,7 @@ export const environment = {
         storageBucket: "rifa-brenda.appspot.com",
         messagingSenderId: "249198544691",
         appId: "1:249198544691:web:280944029e34281d366046"
-    }
+    },
+    emails:["brunomonteiroestudio@gmail.com"],
+    chavePix: '98970023197'
 };

@@ -4,6 +4,8 @@ import { CoreService } from '../../../services/core.service';
 import { MaterialSharedModule } from '../../../modules/material-shared/material-shared.module';
 import { ListNumsComponent } from '../list-nums/list-nums.component';
 import { concatMap, delay, from, interval, map, mergeMap, of } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -17,11 +19,19 @@ import { concatMap, delay, from, interval, map, mergeMap, of } from 'rxjs';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private core: CoreService){}
+  chavePix = environment.chavePix;
+
+  constructor(
+    public core: CoreService,
+
+    ){}
 
   ngOnInit(): void {
 
   }
+
+
+
 
   async generateNums(){
     const nums: INums[] = [];

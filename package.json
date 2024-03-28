@@ -24,6 +24,7 @@
     "bootstrap": "^5.3.3",
     "ngx-lottie": "^11.0.2",
     "ngx-mask": "^17.0.4",
+    "ngx-sharebuttons": "^13.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

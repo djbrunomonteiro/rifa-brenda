@@ -4,13 +4,25 @@
             <mat-card-header>
                 <mat-card-title-group>
                   <mat-card-title>Rifa solidária da Brenda</mat-card-title>
-                  <mat-card-subtitle>Data do sorteio: 03/06/2024 ás 14:00h</mat-card-subtitle>
+                  <mat-card-subtitle>Data do sorteio: 05/05/2024 ás 16:00h</mat-card-subtitle>
                   <mat-card-subtitle>Sorteio de um PIX no valor de 200 reais</mat-card-subtitle>
                 </mat-card-title-group>
               </mat-card-header>
 
             <mat-card-content>
                 <h3 class="p-0 m-0">Valor: R$10,00 cada número</h3>
+            </mat-card-content>
+          </mat-card>
+          <mat-card class="my-2">
+            <mat-card-content >
+                <div class="d-flex justify-content-between  align-items-center">
+                    <div>
+                        <h3 class="p-0 m-0">CHAVE PIX: {{chavePix}}</h3>
+                        <p>Nubank - Brenda K M Tavares</p>
+                    </div>
+                    <button (click)="core.showMessage('PIX copiado com sucesso.')" [cdkCopyToClipboard]="chavePix" mat-stroked-button  color="primary">Copiar PIX</button>
+                </div>
+
             </mat-card-content>
           </mat-card>
 
