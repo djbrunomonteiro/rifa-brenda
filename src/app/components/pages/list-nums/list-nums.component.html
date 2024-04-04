@@ -1,56 +1,77 @@
-<p class="m-3">Selecione um ou mais números</p>
 
-@if (loading) {
-    <p>Carregando números...</p>
-    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-}@else {
-
-    @if(this.houveError){
-        <h4 style="color: red; text-align: center;">* Erro ao carregar os números</h4>
-        <button class="w-100" (click)="setNums()" mat-raised-button color="warn">Tentar novamente</button>
-
-    }@else{
-        <div [formGroup]="form">
-            <mat-button-toggle-group  formControlName="select" class="container-nums" name="numeros" aria-label="Ingredients" multiple>
-                @for (item of numeros$ | async; track $index) {
-                    <mat-button-toggle class="num" [value]="item" [disabled]="item.comprador !== ''">
-        
-                        @if (item.comprador) {
-                            <span class="teste">
-                                <p class="p-0 m-0">{{item.numero}} </p>
-                                <p style="font-size: 0.6rem;" class="p-0 m-0">{{item.comprador}} - {{item.whatsapp | secret}}</p>
-                            </span >
+<form [formGroup]="form">
+    <div class="filtro">
+        <h4 class="text-center">Visualizar Números</h4>
+        <mat-radio-group formControlName="filter" aria-label="Select an option">
+            <mat-radio-button value="disponivel">Disponíveis</mat-radio-button>
+            <mat-radio-button value="todos">Todos</mat-radio-button>
+        </mat-radio-group>
+    </div>
+    
+    <p class="m-3">* Selecione um ou mais números</p>
+    
+    
+    @if (loading) {
+        <p>Carregando números...</p>
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    }@else {
+    
+        @if(this.houveError){
+            <h4 style="color: red; text-align: center;">* Erro ao carregar os números</h4>
+            <button class="w-100" (click)="setNums()" mat-raised-button color="warn">Tentar novamente</button>
+    
+        }@else{
+            <div>
+                <mat-button-toggle-group  formControlName="select" class="container-nums" name="numeros" aria-label="Ingredients" multiple>
+                    @for (item of numeros$ | async; track $index) {
+                        @if(form.value.filter === 'todos'){
+                            <mat-button-toggle class="num" [value]="item" [disabled]="item.comprador !== ''">
+                
+                                @if (item.comprador) {
+                                    <span class="teste">
+                                        <p class="p-0 m-0">{{item.numero}} </p>
+                                        <p style="font-size: 0.6rem;" class="p-0 m-0">{{item.comprador}} - {{item.whatsapp | secret}}</p>
+                                    </span >
+                                }@else {
+                                    <span class="p-0 m-0">{{item.numero}}</span>
+                                }
+                                
+                
+                            </mat-button-toggle>
                         }@else {
-                            <span class="p-0 m-0">{{item.numero}}</span>
+                            @if(item.comprador === '') {
+                                <mat-button-toggle class="num" [value]="item">
+                                    <span class="p-0 m-0">{{item.numero}}</span>
+                                </mat-button-toggle>
+                            }
                         }
-                        
-        
-                    </mat-button-toggle>
+                
+                    }
+                </mat-button-toggle-group>
             
-                }
-            </mat-button-toggle-group>
-        
-        </div>
-        
-        <div class="checkout">
-            <div class="container-checkout">
-                <div class="total">
-                    <p class="m-0 p-0">NÚMEROS SELECIONADOS: </p>
-                    <p class="m-0 p-0">
-                        @for (item of ctrlSelect; track $index) {
-                            <span>{{item}}, </span>
-                        }
-        
-                    </p>
-                </div>
-                <button class="p-4" (click)="openCheckout()" [disabled]="!this.form.value.select?.length" mat-raised-button color="primary">Prosseguir</button>
-        
             </div>
-        
-           
-        </div>
-
+            
+            <div class="checkout">
+                <div class="container-checkout">
+                    <div class="total">
+                        <p class="m-0 p-0">NÚMEROS SELECIONADOS: </p>
+                        <p class="m-0 p-0">
+                            @for (item of ctrlSelect; track $index) {
+                                <span>{{item}}, </span>
+                            }
+            
+                        </p>
+                    </div>
+                    <button class="p-4" (click)="openCheckout()" [disabled]="!this.form.value.select?.length" mat-raised-button color="primary">Prosseguir</button>
+            
+                </div>
+            
+               
+            </div>
+    
+        }
+    
+    
     }
 
-
-}
+</form>

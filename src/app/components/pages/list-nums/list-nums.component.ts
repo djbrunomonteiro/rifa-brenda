@@ -26,7 +26,8 @@ export class ListNumsComponent implements OnInit, AfterViewInit {
 
   numeros$: BehaviorSubject<INums[]> = new BehaviorSubject<INums[]>([]);
   form = this.fb.group({
-    select: this.fb.control([], { validators: [Validators.required]})
+    select: this.fb.control([], { validators: [Validators.required]}),
+    filter: ['disponivel']
   });
 
   ctrlSelect: any[] = [];
@@ -47,7 +48,6 @@ export class ListNumsComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.form.valueChanges.subscribe(c => {
-      console.log(c);
       if (!c.select) { return }
       this.ctrlSelect = c.select?.map((elem: any) => elem?.numero)
 
@@ -60,8 +60,6 @@ export class ListNumsComponent implements OnInit, AfterViewInit {
     this.ctrlSelect = [];
     this.form.patchValue({ select: [] });
     this.core.getAll().subscribe(res => {
-      console.log('ops', res);
-
       this.loading= false;
       if (res.status !== 200) { 
         this.core.showMessage('Ops algo deu errado, tente novamente mais tarde!');
@@ -69,7 +67,6 @@ export class ListNumsComponent implements OnInit, AfterViewInit {
         return 
       }
       this.numeros$.next(res.results)
-      console.log(this.numeros$.value);
       this.houveError = false;
 
     })
@@ -77,7 +74,6 @@ export class ListNumsComponent implements OnInit, AfterViewInit {
 
 
   openCheckout() {
-    console.log(this.form.value);
     if(!this.form.value.select?.length){return}
     
     const dialogRef = this.dialog.open(DialogCheckoutComponent, { data: this.form.value.select, disableClose: true });
@@ -85,8 +81,6 @@ export class ListNumsComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe(result => {
       if (!result) { return }
       this.setNums();
-
-      console.log(`Dialog result: ${result}`);
     });
   }
 

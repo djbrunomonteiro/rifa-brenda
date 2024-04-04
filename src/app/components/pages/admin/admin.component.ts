@@ -51,21 +51,9 @@ export class AdminComponent implements OnInit {
     this.core.getAll().subscribe(res => {
       const { results } = res;
       if (!results) { return }
-      console.log('ops', res);
-      console.log(this.auth.userData$.value?.email);
       this.auth.userData$.subscribe(user => {
-        console.log(user);
-
         this.itens = results.filter((elem: INums) => elem?.vendedor === user?.email);
-
       })
-
-
-      console.log(this.itens);;
-
-
-
-
 
     })
   }
@@ -80,8 +68,6 @@ export class AdminComponent implements OnInit {
     const { checked } = event;
     const item: INums = { ...num, pago: checked }
     this.core.updateOne(item).subscribe(res => {
-      console.log(res);
-
     })
 
   }

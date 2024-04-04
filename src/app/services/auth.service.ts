@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Auth, signInWithPopup, GoogleAuthProvider } from '@angular/fire/auth';
-import { CollectionReference, Firestore } from '@angular/fire/firestore';
+import { CollectionReference } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from '../../environments/environment';
@@ -22,7 +22,6 @@ export class AuthService {
   constructor(
     private auth: Auth,
     private router: Router,
-    private firestore: Firestore,
     private core: CoreService
   ) { }
 
@@ -53,11 +52,7 @@ export class AuthService {
   }
 
   isAuth() {
-    console.log('chamouu is auth');
-    
     this.auth.onAuthStateChanged((user) => {
-      console.log(user);
-      
       if (!user) { return }
       const item = { nome: user.displayName, email: user.email, id: user.uid, foto: user.photoURL };
       this.userData$.next(item);

@@ -26,7 +26,6 @@ export class CoreService {
     return this.http.get(`${this.apiUrl}/rifa`)
       .pipe(
         map((res: any) => {
-          console.log(res);
           const { status, results, message } = res;
           const response: IResponse = { status, results, message };
           return response;

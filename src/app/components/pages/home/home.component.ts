@@ -3,10 +3,8 @@ import { INums } from '../../../models/nums';
 import { CoreService } from '../../../services/core.service';
 import { MaterialSharedModule } from '../../../modules/material-shared/material-shared.module';
 import { ListNumsComponent } from '../list-nums/list-nums.component';
-import { concatMap, delay, from, interval, map, mergeMap, of } from 'rxjs';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { environment } from '../../../../environments/environment';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
@@ -32,13 +30,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
-
-
     this.auth.userData$.subscribe(user => {
-      console.log(user);
-
-      
       if(user){
         this.router.navigate(['/vendedor/' + user?.email]);
         return;

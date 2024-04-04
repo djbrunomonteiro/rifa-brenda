@@ -63,7 +63,6 @@ export class DialogCheckoutComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.data);
     this.total = this.data.length * 10;
     this.form.patchValue({
       dataCompra: new Date().toISOString(),
@@ -92,7 +91,6 @@ export class DialogCheckoutComponent implements OnInit {
     const result = nums$.pipe(
       mergeMap(num => this.core.updateOne(num))
     ).subscribe(r => {
-      console.log(r);
       setTimeout(() =>{
         this.textLoading = 'Salvo com sucesso! Boa sorte :)';
         this.options = {
