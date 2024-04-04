@@ -1,4 +1,4 @@
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { ApplicationConfig, LOCALE_ID, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -11,6 +11,11 @@ import { provideEnvironmentNgxMask } from 'ngx-mask';
 import { provideHttpClient } from '@angular/common/http';
 import { provideLottieOptions } from 'ngx-lottie';
 import player from 'lottie-web';
+
+import localePt from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(localePt);
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -26,6 +31,7 @@ export const appConfig: ApplicationConfig = {
     provideLottieOptions({
       player: () => player,
     }),
+    {provide: LOCALE_ID, useValue: 'pt-BR' }
 
   ]
 };

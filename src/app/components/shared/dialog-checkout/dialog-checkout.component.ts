@@ -11,6 +11,9 @@ import { AnimationItem } from 'lottie-web';
 import { LottieComponent, AnimationOptions } from 'ngx-lottie';
 import { SecretPipe } from '../../../pipes/secret.pipe';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '../../../services/auth.service';
+import { ActivatedRoute } from '@angular/router';
+import { EdialogRemoveComponent } from '../edialog-remove/edialog-remove.component';
 @Component({
   selector: 'app-dialog-checkout',
   standalone: true,
@@ -22,7 +25,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     NgxMaskDirective,
     NgxMaskPipe,
     LottieComponent,
-    SecretPipe
+    SecretPipe,
+    EdialogRemoveComponent
   ],
   templateUrl: './dialog-checkout.component.html',
   styleUrl: './dialog-checkout.component.scss'
@@ -53,20 +57,25 @@ export class DialogCheckoutComponent implements OnInit {
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<DialogCheckoutComponent>,
     @Inject(MAT_DIALOG_DATA) public data: INums[],
-    public snackBar: MatSnackBar 
+    public snackBar: MatSnackBar,
+    private auth: AuthService,
+    private activatedRoute: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
     console.log(this.data);
     this.total = this.data.length * 10;
     this.form.patchValue({
-      dataCompra: new Date().toISOString() 
-    })
+      dataCompra: new Date().toISOString(),
+      vendedor: this.auth.userData$.value?.email ?? this.activatedRoute.snapshot.params['email']
+    });
+
+    
 
   }
 
-
   save() {
+
     this.loading = true
     const updateItens = this.data.map(num => (
       {
@@ -74,7 +83,8 @@ export class DialogCheckoutComponent implements OnInit {
         dataCompra: new Date().toISOString(),  
         whatsapp: this.form.value.whatsapp ?? '', 
         comprador: this.form.value.comprador ?? '',  
-        pago: this.form.value.pago ?? false
+        pago: this.form.value.pago ?? false,
+        vendedor: this.form.value.vendedor ?? ''
       }))
 
     const nums$ = from(updateItens)

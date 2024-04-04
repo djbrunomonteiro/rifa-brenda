@@ -6,6 +6,8 @@ import { ListNumsComponent } from '../list-nums/list-nums.component';
 import { concatMap, delay, from, interval, map, mergeMap, of } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { environment } from '../../../../environments/environment';
+import { ActivatedRoute, Route, Router } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -20,20 +22,47 @@ import { environment } from '../../../../environments/environment';
 export class HomeComponent implements OnInit {
 
   chavePix = environment.chavePix;
+  emails = environment.emails;
 
   constructor(
     public core: CoreService,
-
-    ){}
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private auth: AuthService
+  ) { }
 
   ngOnInit(): void {
+
+
+
+    this.auth.userData$.subscribe(user => {
+      console.log(user);
+
+      
+      if(user){
+        this.router.navigate(['/vendedor/' + user?.email]);
+        return;
+      }
+      const email = this.activatedRoute.snapshot.params['email'];
+      if (!email) {
+        this.core.showMessage('Você precisa está no link do vendedor ou logado.', 5000);
+        this.router.navigate(['/admin']);
+        return;
+      }
+
+      if(!this.emails.includes(email)){
+        this.core.showMessage('LINK DE VENDAS INVALIDO, verifique com o responsavel do link ou se houve error na digitação do link.', 6000 );
+        this.router.navigate(['/admin']);
+        return;
+      }
+
+    })
+
 
   }
 
 
-
-
-  async generateNums(){
+  async generateNums() {
     const nums: INums[] = [];
     return new Promise<INums[]>((resolve) => {
       for (let index = 1; index <= 300; index++) {
@@ -45,13 +74,13 @@ export class HomeComponent implements OnInit {
           dataCompra: '',
           whatsapp: ''
         }
-  
+
         nums.push(num)
-  
+
       }
 
       resolve(nums);
-      
+
     })
   }
 
@@ -59,13 +88,13 @@ export class HomeComponent implements OnInit {
   //   const nums = await this.generateNums();
   //   console.log(nums);
   //   const nums$ = from(nums)
-    
+
   //   const result = nums$.pipe(
   //     concatMap(num => this.core.addOne(num))
   //   ).subscribe(r =>{
   //     console.log(r);
   //   })
-    
+
   // }
 
 }

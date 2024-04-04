@@ -26,7 +26,7 @@ const customConfig: ShareButtonsConfig = {
 })
 export class AppComponent implements OnInit {
 
-  title = 'rifa';
+  title = 'Rifa da Brenda';
 
   constructor(private auth: AuthService){}
 

@@ -45,9 +45,9 @@ export class CoreService {
     return this.http.patch(`${this.apiUrl}/rifa/${item.id}`, item);
   }
 
-  showMessage(message: string) {
+  showMessage(message: string, duration = 3000) {
     this.snackBar.open(message, 'Fechar', {
-      duration: 3000,
+      duration,
       verticalPosition: 'bottom',
       horizontalPosition: 'center'
     })

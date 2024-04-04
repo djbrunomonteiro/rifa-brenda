@@ -20,7 +20,7 @@
                         <h3 class="p-0 m-0">CHAVE PIX: {{chavePix}}</h3>
                         <p>Nubank - Brenda K M Tavares</p>
                     </div>
-                    <button (click)="core.showMessage('PIX copiado com sucesso.')" [cdkCopyToClipboard]="chavePix" mat-stroked-button  color="primary">Copiar PIX</button>
+                    <button mat-flat-button (click)="core.showMessage('PIX copiado com sucesso.')" [cdkCopyToClipboard]="chavePix"   color="primary">Copiar PIX</button>
                 </div>
 
             </mat-card-content>

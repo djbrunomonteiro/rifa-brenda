@@ -63,5 +63,13 @@ export class AuthService {
       this.userData$.next(item);
     });
 
+
+  }
+
+  logout() {
+    this.auth.signOut();
+    this.router.navigate(['/']);
+    this.userData$.next(undefined);
+
   }
 }

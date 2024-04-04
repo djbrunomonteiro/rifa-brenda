@@ -1,0 +1,23 @@
+@if(loading){
+
+    <p class="p-5">
+        AGUARDE, REMOVENDO DADOS !!!!
+    </p>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+
+}@else {
+    <h2 mat-dialog-title>ATENÇÃO !!! ÁREA DE EXCLUSÃO</h2>
+    <mat-dialog-content>
+      <div class="container-dialog">
+        <p>Ao clicar em remover esse registro, a operação não poderá ser desfeita!!!</p>
+    
+      </div>
+    
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>Cancelar</button>
+      <button (click)="remove()" mat-raised-button color="warn"
+        class="btn-salvar">REMOVER ITEM</button>
+    </mat-dialog-actions>
+
+}

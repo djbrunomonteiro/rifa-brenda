@@ -13,6 +13,8 @@ import {ClipboardModule} from '@angular/cdk/clipboard';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 @NgModule({
   declarations: [],
   imports: [
@@ -29,7 +31,9 @@ import {MatMenuModule} from '@angular/material/menu';
     ClipboardModule,
     MatProgressBarModule,
     MatSnackBarModule,
-    MatMenuModule
+    MatMenuModule,
+    MatExpansionModule,
+    MatSlideToggleModule
   ],
   exports: [
     MatToolbarModule,
@@ -44,7 +48,9 @@ import {MatMenuModule} from '@angular/material/menu';
     ClipboardModule,
     MatProgressBarModule,
     MatSnackBarModule,
-    MatMenuModule
+    MatMenuModule,
+    MatExpansionModule,
+    MatSlideToggleModule
   ]
 })
 export class MaterialSharedModule { }

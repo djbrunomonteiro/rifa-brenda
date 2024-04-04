@@ -1,0 +1,7 @@
+{
+    "/api": {
+      "target": "http://rifa.djbrunomonteiro.com.br:3010", 
+      "secure": false, 
+      "changeOrigin": true 
+    }
+  }

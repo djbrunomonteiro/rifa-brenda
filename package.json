@@ -5,9 +5,10 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "deploy": "ng build && firebase deploy",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
-  },
+  }, 
   "private": true,
   "dependencies": {
     "@angular/animations": "^17.3.0",

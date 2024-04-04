@@ -35,7 +35,7 @@
         <div class="checkout">
             <div class="container-checkout">
                 <div class="total">
-                    <p class="m-0 p-0">SELECIONADOS: </p>
+                    <p class="m-0 p-0">NÚMEROS SELECIONADOS: </p>
                     <p class="m-0 p-0">
                         @for (item of ctrlSelect; track $index) {
                             <span>{{item}}, </span>
@@ -43,7 +43,7 @@
         
                     </p>
                 </div>
-                <button (click)="openCheckout()" [disabled]="!form.value.select" mat-raised-button color="primary">finalizar</button>
+                <button class="p-4" (click)="openCheckout()" [disabled]="!this.form.value.select?.length" mat-raised-button color="primary">Prosseguir</button>
         
             </div>
         

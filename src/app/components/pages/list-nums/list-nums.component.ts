@@ -77,6 +77,9 @@ export class ListNumsComponent implements OnInit, AfterViewInit {
 
 
   openCheckout() {
+    console.log(this.form.value);
+    if(!this.form.value.select?.length){return}
+    
     const dialogRef = this.dialog.open(DialogCheckoutComponent, { data: this.form.value.select, disableClose: true });
 
     dialogRef.afterClosed().subscribe(result => {
