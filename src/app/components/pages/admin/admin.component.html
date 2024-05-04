@@ -1,10 +1,8 @@
 <div class="row m-0 justify-content-center align-items-center">
     <div class="col-md-8">
         @if(auth.userData$ | async) {
-
-        <mat-tab-group backgroundColor="primary" color="primary">
+        <mat-tab-group backgroundColor="primary" color="primary" [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
             <mat-tab label="Home">
-
                 <p class="m-3">Atalhos rapidos</p>
                 <mat-card class="my-2">
                     <mat-card-content>
@@ -33,6 +31,9 @@
                     </mat-card-content>
                 </mat-card>
 
+                <mat-card class="my-5">
+                    <button (click)="auth.logout();" mat-flat-button color="warn">SAIR DA CONTA</button>
+                </mat-card>
             </mat-tab>
 
             <mat-tab label="Compradores">
@@ -74,9 +75,24 @@
 
             </mat-tab>
 
-        </mat-tab-group>
+            <mat-tab label="Área de SORTEIO">
 
-        <button (click)="auth.logout();" class="logout" mat-flat-button color="primary">SAIR DA CONTA</button>
+                <p class="m-3">Lista de habilitados para Sorteio: <b>TOTAL DE {{compradoresParaSorteio.length}} PESSOAS</b> </p>
+                <mat-card class="my-2">
+                    <mat-card-content>
+                        <div class="d-flex flex-wrap justify-content-between  align-items-center mb-5">
+                            <mat-chip-set aria-label="Fish selection">
+                                @for (item of compradoresParaSorteio; track $index) {
+                                    <mat-chip>Nº {{item.numero}} - {{item.comprador}}</mat-chip>
+                                    <span></span>
+                                }
+                              </mat-chip-set>
+                        </div>
+
+                    </mat-card-content>
+                </mat-card>
+            </mat-tab>
+        </mat-tab-group>
 
         }@else {
         <div class="container-login">
@@ -86,3 +102,15 @@
         }
     </div>
 </div>
+
+@if(selected.value === 2){
+    <mat-toolbar class="btn-sorteio" color="primary">
+        <span>Realizar Sorteio?</span>
+        <span class="example-spacer"></span>
+        <button (click)="openSorteio()" mat-stroked-button>
+          Iniciar
+            <mat-icon>ads_click</mat-icon>
+        </button>
+      </mat-toolbar>
+
+}

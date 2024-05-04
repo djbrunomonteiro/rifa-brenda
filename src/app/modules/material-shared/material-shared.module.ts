@@ -16,6 +16,8 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatChipsModule} from '@angular/material/chips';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -35,7 +37,8 @@ import {MatRadioModule} from '@angular/material/radio';
     MatMenuModule,
     MatExpansionModule,
     MatSlideToggleModule,
-    MatRadioModule
+    MatRadioModule,
+    MatChipsModule
   ],
   exports: [
     MatToolbarModule,
@@ -53,7 +56,8 @@ import {MatRadioModule} from '@angular/material/radio';
     MatMenuModule,
     MatExpansionModule,
     MatSlideToggleModule,
-    MatRadioModule
+    MatRadioModule,
+    MatChipsModule
   ]
 })
 export class MaterialSharedModule { }

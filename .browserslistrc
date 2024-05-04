@@ -1,0 +1,6 @@
+chrome >= 80
+firefox >= 78
+safari >= 15
+edge >= 88
+ios >= 15
+android >= 8

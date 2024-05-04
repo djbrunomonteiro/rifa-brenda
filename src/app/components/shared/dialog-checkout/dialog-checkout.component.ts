@@ -63,13 +63,14 @@ export class DialogCheckoutComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.total = this.data.length * 10;
+    const vendedor = localStorage.getItem('email_vendedor') ?? this.auth.userData$.value?.email;
     this.form.patchValue({
       dataCompra: new Date().toISOString(),
-      vendedor: this.auth.userData$.value?.email ?? this.activatedRoute.snapshot.params['email']
-    });
-
+      vendedor
+    })
     
+    this.total = this.data.length * 10;
+
 
   }
 
@@ -83,8 +84,8 @@ export class DialogCheckoutComponent implements OnInit {
         whatsapp: this.form.value.whatsapp ?? '', 
         comprador: this.form.value.comprador ?? '',  
         pago: this.form.value.pago ?? false,
-        vendedor: this.form.value.vendedor ?? ''
-      }))
+        vendedor: this.form.value.vendedor ?? this.auth.userData$.value?.email
+      }));
 
     const nums$ = from(updateItens)
 

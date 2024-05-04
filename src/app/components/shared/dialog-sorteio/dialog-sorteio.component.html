@@ -1,0 +1,25 @@
+<h2 mat-dialog-title class="text-center">Agradeço a todos os participantes. <mat-icon>favorite</mat-icon></h2>
+<mat-dialog-content>
+    <div class="container-dialog">
+        @if(loading){
+        <h3>{{textLoading}}</h3>
+            @if(count && count >= 0){
+            <h1 class="count">{{count}}</h1>
+            }
+        }@else {
+            <h3 >{{textGanhador}}</h3>
+            <h3 >{{textGanhadorNumero}}</h3>
+        }
+        <div class="animation">
+            <ng-lottie [options]="options" />
+        </div>
+    </div>
+
+
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <!-- <button mat-raised-button color="primary"
+    class="btn-salvar">SALVAR</button> -->
+</mat-dialog-actions>

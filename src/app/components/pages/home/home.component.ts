@@ -4,7 +4,7 @@ import { CoreService } from '../../../services/core.service';
 import { MaterialSharedModule } from '../../../modules/material-shared/material-shared.module';
 import { ListNumsComponent } from '../list-nums/list-nums.component';
 import { environment } from '../../../../environments/environment';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
@@ -30,27 +30,52 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.auth.userData$.subscribe(user => {
-      if(user){
-        this.router.navigate(['/vendedor/' + user?.email]);
-        return;
+
+    setTimeout(() =>{
+      this.auth.userData$.subscribe(user => {
+        if(user){
+          this.router.navigate(['/vendedor/' + user?.email]);
+          return;
+        }
+        const email = this.activatedRoute.snapshot.params['email'];
+        if (!email) {
+          this.core.showMessage('Você precisa está no link do vendedor ou logado.', 5000);
+          this.router.navigate(['/admin']);
+          return;
+        }
+  
+        if(!this.emails.includes(email)){
+          this.core.showMessage('LINK DE VENDAS INVALIDO, verifique com o responsavel do link ou se houve error na digitação do link.', 6000 );
+          this.router.navigate(['/admin']);
+          return;
+        }
+  
+      })
+
+    }, 1000);
+
+    this.listenRoute();
+
+
+  }
+
+  listenRoute() {
+    const url = window?.location.href;
+    this.setEmail(url)
+ 
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        const {url} = event;
+        if(!url.includes('@')){return};
+        this.setEmail(url);
       }
-      const email = this.activatedRoute.snapshot.params['email'];
-      if (!email) {
-        this.core.showMessage('Você precisa está no link do vendedor ou logado.', 5000);
-        this.router.navigate(['/admin']);
-        return;
-      }
+    });
+  }
 
-      if(!this.emails.includes(email)){
-        this.core.showMessage('LINK DE VENDAS INVALIDO, verifique com o responsavel do link ou se houve error na digitação do link.', 6000 );
-        this.router.navigate(['/admin']);
-        return;
-      }
-
-    })
-
-
+  setEmail(url: string){
+    if(!url.includes('@')){return};
+    const email = url.split('/vendedor/')[1];
+    localStorage.setItem('email_vendedor', email);
   }
 
 

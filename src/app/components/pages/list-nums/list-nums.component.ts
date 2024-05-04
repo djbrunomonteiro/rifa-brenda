@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { MaterialSharedModule } from '../../../modules/material-shared/material-shared.module';
 import { CoreService } from '../../../services/core.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject, interval, takeUntil } from 'rxjs';
 import { INums } from '../../../models/nums';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -22,7 +22,7 @@ import { SecretPipe } from '../../../pipes/secret.pipe';
   templateUrl: './list-nums.component.html',
   styleUrl: './list-nums.component.scss'
 })
-export class ListNumsComponent implements OnInit, AfterViewInit {
+export class ListNumsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   numeros$: BehaviorSubject<INums[]> = new BehaviorSubject<INums[]>([]);
   form = this.fb.group({
@@ -35,11 +35,15 @@ export class ListNumsComponent implements OnInit, AfterViewInit {
   loading = false;
   houveError = false;
 
+  timer = interval(30000);
+  unsubscribeSignal = new Subject();
+
   constructor(
     private core: CoreService,
     private fb: FormBuilder,
     public dialog: MatDialog
   ) { }
+
 
 
   ngOnInit(): void {
@@ -69,7 +73,9 @@ export class ListNumsComponent implements OnInit, AfterViewInit {
       this.numeros$.next(res.results)
       this.houveError = false;
 
-    })
+    });
+
+    this.updateList();
   }
 
 
@@ -83,5 +89,27 @@ export class ListNumsComponent implements OnInit, AfterViewInit {
       this.setNums();
     });
   }
+
+  updateList(){
+    this.timer.pipe(
+      takeUntil(this.unsubscribeSignal)
+    )
+    .subscribe(() => {
+      this.core.getAll().subscribe(res => {
+        console.log(res);
+        
+        if(res.status !== 200){return}
+        this.numeros$.next(res.results)
+      })
+
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribeSignal.next(true);
+    this.unsubscribeSignal.complete();
+  }
+
+
 
 }

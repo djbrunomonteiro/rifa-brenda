@@ -1,0 +1,36 @@
+:host{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  mat-dialog-content{
+    max-height: unset !important;
+    flex: 1 0 0;
+  }
+
+  h2{
+    color: #F7BBD0 !important
+  }
+
+  .container-dialog{
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    h3{
+        text-align: center;
+    }
+    p{
+        text-align: center;
+    }
+
+    .count{
+        font-size: 3rem;
+    }
+    .animation{
+        max-width: 300px;
+    }
+    
+  }
+
