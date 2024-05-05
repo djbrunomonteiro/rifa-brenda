@@ -1,0 +1,9 @@
+.container-default{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .animation{
+        max-width: 300px;
+    }
+}
